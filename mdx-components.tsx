@@ -17,24 +17,29 @@ const components = {
     <h2 className="text-gray-800 font-medium mt-8 mb-3" {...props} />
   ),
   h3: (props: HeadingProps) => (
-    <h3 className="text-gray-800 font-medium mt-8 mb-3" {...props} />
+    <h3 className="text-gray-800 font-medium mt-1" {...props} />
   ),
-  h4: (props: HeadingProps) => <h4 className="font-semibold text-2xl" {...props} />,
+  h4: (props: HeadingProps) => (
+    <h4 className="font-semibold text-2xl" {...props} />
+  ),
   p: (props: ParagraphProps) => (
     <p className="text-gray-800 leading-snug" {...props} />
   ),
   ol: (props: ListProps) => (
-    <ol className="text-gray-800 list-decimal pl-5 space-y-2" {...props} />
+    <ol
+      className="text-gray-800 list-decimal pl-5 space-y-0.5 my-2"
+      {...props}
+    />
   ),
   ul: (props: ListProps) => (
-    <ul className="text-gray-800 list-disc pl-5 space-y-1" {...props} />
+    <ul className="text-gray-800 list-disc pl-5 space-y-1 my-2" {...props} />
   ),
   li: (props: ListItemProps) => <li className="pl-1" {...props} />,
   em: (props: ComponentPropsWithoutRef<"em">) => (
     <em className="font-medium" {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium" {...props} />
+    <strong className="font-bold" {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
     const className = "text-blue-500 hover:text-blue-700";

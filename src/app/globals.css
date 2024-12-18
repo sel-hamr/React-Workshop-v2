@@ -85,7 +85,6 @@ pre {
   border-radius: 0.5rem;
   overflow-x: auto;
   padding: 1rem;
-  margin: 1.5rem 0;
   line-height: 1;
 }
 
@@ -97,4 +96,3 @@ pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-

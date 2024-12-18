@@ -39,7 +39,7 @@ Section.Title = ({ children }: { children: React.ReactNode }) => {
 };
 
 Section.Description = ({ children }: { children: React.ReactNode }) => {
-  return <p className="text-sm">{children}</p>;
+  return <div className="text-sm">{children}</div>;
 };
 
 Section.Header = ({ children }: { children: React.ReactNode }) => {
@@ -59,10 +59,6 @@ Section.Body = ({ children }: { children: React.ReactNode }) => {
 };
 
 Section.Code = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <pre className="bg-zinc-800 text-white p-4 rounded-md w-full">
-      {children}
-    </pre>
-  );
+  return <div className="w-full">{children}</div>;
 };
 export default Section;
