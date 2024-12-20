@@ -14,7 +14,7 @@ const components = {
     <h1 className="font-medium pt-2  mb-0 fade-in" {...props} />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="text-gray-800 font-medium mt-8 mb-3" {...props} />
+    <h2 className="text-4xl text-center sm:text-left font-bold" {...props} />
   ),
   h3: (props: HeadingProps) => (
     <h3 className="text-gray-800 font-medium mt-1" {...props} />
@@ -22,9 +22,8 @@ const components = {
   h4: (props: HeadingProps) => (
     <h4 className="font-semibold text-2xl" {...props} />
   ),
-  p: (props: ParagraphProps) => (
-    <p className="text-gray-800 leading-snug" {...props} />
-  ),
+  h5: (props: HeadingProps) => <h4 className="text-sm" {...props} />,
+  p: (props: ParagraphProps) => <p className="text-sm" {...props} />,
   ol: (props: ListProps) => (
     <ol
       className="text-gray-800 list-decimal pl-5 space-y-0.5 my-2"

@@ -1,91 +1,42 @@
 import Section from "@/components/ui/section";
-import React from "react";
 
 <Section>
-  <Section.Back />
-  <Section.Header>
-    <Section.Title>Understanding React's key</Section.Title>
-    <Section.Description>
-      React's key prop is a cornerstone for managing component
-      rendering efficiently. This blog post explores the importance of the
-      key prop with practical examples and highlights what happens when it
-      is not provided. We'll also discuss insights inspired by your
-      code and video reference.
-    </Section.Description>
-  </Section.Header>
-  #### What is the key Prop?
-<Section.Description>
-  The key prop in React uniquely identifies elements within a list or
-  dynamically rendered components. It ensures React can track which elements
-  have changed, been added, or removed, allowing for efficient DOM updates.
-</Section.Description>
-#### Example :
-  <Section.Description>
-    Let’s consider a React application with two counters (e.g., for
-    'milk' and 'tea'). Switching between them
-    demonstrates why key is essential.
-  </Section.Description>
-  <Section.Body>
-    <Section.Code>
-    ```jsx
-    import React from "react";
+<Section.Back />
 
-    const Counter = () => {
-    const [count, setCount] = React.useState(0);
+## The Key Prop in React
 
-    return (
+The key prop in React uniquely identifies elements within a list or dynamically rendered components. It ensures React can track which elements have changed, been added, or removed, allowing for efficient DOM updates.
 
+#### Example:
+
+Let’s consider a React application with two counters (e.g., for milk and tea) Switching between them demonstrates why key is essential.
+
+```jsx
+import React from "react";
+const Counter = () => {
+  const [count, setCount] = React.useState(0);
+  return (
     <div>
       <h1>{count}</h1>
       <button onClick={() => setCount(count + 1)}>Increment</button>
       <button onClick={() => setCount(count - 1)}>Decrement</button>
     </div>
-    ); };
+  );
+};
 
-    export default function Page() {
-    const [milkOrTea, setShow] = React.useState(true);
-
-    return (
+export default function Page() {
+  const [milkOrTea, setShow] = React.useState(true);
+  return (
     <div>
       <h1>Key Prop Demonstration</h1>
       <button onClick={() => setShow(!milkOrTea)}>
         Toggle to {milkOrTea ? "tea" : "milk"}
       </button>
-
-    {/* Switching between components with unique keys */}
-      {milkOrTea ? (
-        <Counter key="milk" />
-      ) : (
-        <Counter key="tea" />
-      )}
-
+      {/* Switching between components with unique keys */}
+      {milkOrTea ? <Counter key="milk" /> : <Counter key="tea" />}
     </div>
-    );
-
+  );
 }
-
 ```
-</Section.Code>
-  </Section.Body>
-  #### How the key Prop Works in This Example
-  <Section.Description>
-    ### ** 1 - Component Differentiation **
-    1. Each Counter has a unique key (milk or tea).
-    2. When toggling between milkOrTea, React creates a new instance of the Counter for each unique key.
-  </Section.Description>
-  <Section.Description>
-    ### ** 2 - Fresh State **
-    1. The key ensures React treats the two Counter components as entirely separate. This prevents state (like count) from being shared between them.
-  </Section.Description>
-  #### What Happens Without the key Prop?
-  <Section.Description>
-    If the key is not provided:
-    ### **1 - Re-rendering All Components**
-    1. React cannot uniquely identify each element, so it re-renders the entire list or component tree.
-    2. This leads to inefficiency, especially in large lists or complex UIs.
 
-    ### **2 - Unintended State Sharing**
-    1. React may reuse the same component instance even when toggling between elements, resulting in shared states across seemingly different components.
-  </Section.Description>
 </Section>
-```

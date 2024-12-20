@@ -4,73 +4,72 @@ import React from "react";
 import { exampleData, exampleData2, exampleData3 } from "./data";
 
 <Section>
-  <Section.Back />
-  <Section.Header>
-    <Section.Title>Dynamic Form</Section.Title>
-    <Section.Description>
-      This is a dynamic form that can be used to create any form. by passing
-      array of objects to the dataFields prop.
-    </Section.Description>
-  </Section.Header>
-  #### Example : 
-  <Section.Body>
-    <DynamicForm
-      description="description of the form goes here"
-      title="test form1"
-      dataFields={exampleData}
-    />
-    <DynamicForm
-      description="description of the form goes here 2"
-      title="test form"
-      dataFields={exampleData2}
-    />
-    <DynamicForm
-      description="description of the form goes here 3"
-      title="test form"
-      dataFields={exampleData3}
-    />
-  </Section.Body>
-  #### >How to use :
-  <Section.Code>
-    ```jsx
-      import DynamicForm from "@/components/dynamic-form";
-      const exampleData3: FormField[] = [
-        {
-          type: "email",
-          name: "email",
-          label: "Email",
-          placeholder: "Email",
-          error: "Email is required",
-          width: 1,
-          required: true,
-        },
-        {
-          type: "password",
-          name: "password",
-          label: "Password",
-          placeholder: "Password",
-          error: "Password is required",
-          width: 1,
-        },
-        {
-          type: "action",
-          name: "actions",
-          buttons: [
-            {
-              label: "Submit",
-              type: "submit",
-              className: "w-full",
-              variant: "secondary",
-            },
-          ],
-          width: 1,
-        },
-      ];
-      <DynamicForm
-      description="description of the form goes here"
-      title="test form1"
-      dataFields={Data}
-    />
-    ```
-  </Section.Code>
+
+## Dynamic Form
+
+This is a dynamic form that can be used to create any form. by passing array of objects to the dataFields prop.
+
+#### Example :
+
+<Section.Body>
+  <DynamicForm
+    description="description of the form goes here"
+    title="test form1"
+    dataFields={exampleData}
+  />
+  <DynamicForm
+    description="description of the form goes here 2"
+    title="test form"
+    dataFields={exampleData2}
+  />
+  <DynamicForm
+    description="description of the form goes here 3"
+    title="test form"
+    dataFields={exampleData3}
+  />
+</Section.Body>
+
+#### >How to use :
+
+```jsx
+import DynamicForm from "@/components/dynamic-form";
+const exampleData3: FormField[] = [
+  {
+    type: "email",
+    name: "email",
+    label: "Email",
+    placeholder: "Email",
+    error: "Email is required",
+    width: 1,
+    required: true,
+  },
+  {
+    type: "password",
+    name: "password",
+    label: "Password",
+    placeholder: "Password",
+    error: "Password is required",
+    width: 1,
+  },
+  {
+    type: "action",
+    name: "actions",
+    buttons: [
+      {
+        label: "Submit",
+        type: "submit",
+        className: "w-full",
+        variant: "secondary",
+      },
+    ],
+    width: 1,
+  },
+];
+<DynamicForm
+  description="description of the form goes here"
+  title="test form1"
+  dataFields={Data}
+/>;
+```
+
 </Section>

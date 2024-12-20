@@ -2,23 +2,16 @@ import Section from "@/components/ui/section";
 import React from "react";
 
 <Section>
-  <Section.Back />
-  <Section.Header>
-    <Section.Title>React createPortal</Section.Title>
-    <Section.Description>
-      React.createPortal is a method provided by React to render components
-      outside the DOM hierarchy of their parent component. It allows you to
-      mount a child node into a different part of the DOM, independent of
-      where it is declared in your React component tree.
-    </Section.Description>
-  </Section.Header>
-  #### Why Use createPortal?
+<Section.Back />
 
-<Section.Description>
-  Portals are particularly useful when you need to render elements that should
-  visually break out of their parent container or work independently of its
-  styling or positioning.
-</Section.Description>
+## >React createPortal
+
+React.createPortal is a method provided by React to render components outside the DOM hierarchy of their parent component. It allows you to mount a child node into a different part of the DOM, independent of where it is declared in your React component tree.
+
+#### Why Use createPortal?
+
+Portals are particularly useful when you need to render elements that should visually break out of their parent container or work independently of its styling or positioning.
+
 **Common Use Cases**
 
 - **Modals and Dialog Boxes** Modals often need to overlay the entire screen and not be constrained by the styles of their parent container.
@@ -28,8 +21,6 @@ import React from "react";
 - **Global Elements** Some global elements like contextual menus or floating action buttons need to be rendered at specific places in the DOM, such as a body tag.
 
 #### Example :
-
-<Section.Code>
 
 ```jsx
 import React, { useState } from "react";
@@ -64,7 +55,5 @@ const Modal = ({ children, onClose }) => {
 
 export default App;
 ```
-
-</Section.Code>
 
 </Section>

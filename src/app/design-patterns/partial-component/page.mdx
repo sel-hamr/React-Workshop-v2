@@ -1,0 +1,44 @@
+import { DemoPartialComponent } from "@/components/design-patterns/partial-component";
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## Partial Component
+
+This pattern is used to create a component that can be used as a partial component in other components. This pattern is useful when you have a component that is used in multiple places in your application, and you want to avoid duplicating the code for that component.
+
+### Example :
+
+<Section.Body>
+  <DemoPartialComponent />
+</Section.Body>
+
+### How to use :
+
+```jsx
+import React from "react";
+
+export const Label = ({ color, size }: { color: string, size: string }) => {
+  return (
+    <div>
+      <p style={{ color: color, fontSize: size }}>Hello World</p>
+    </div>
+  );
+};
+
+export const partialComponent = (Component: React.FC, partialProps: any) => {
+  return (props: any) => {
+    return <Component {...partialProps} {...props} />;
+  };
+};
+
+const RedTitle = partialComponent(Label, { color: "red" });
+
+export const DemoPartialComponent = () => {
+  return <RedTitle size="20px" />;
+};
+```
+
+</Section>

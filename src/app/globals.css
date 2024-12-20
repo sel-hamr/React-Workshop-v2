@@ -95,4 +95,5 @@ pre::-webkit-scrollbar {
 pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 100%;
 }
