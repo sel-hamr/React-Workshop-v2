@@ -17,7 +17,7 @@ const components = {
     <h2 className="text-4xl text-center sm:text-left font-bold" {...props} />
   ),
   h3: (props: HeadingProps) => (
-    <h3 className="text-gray-800 font-medium mt-1" {...props} />
+    <h3 className="text-gray-800 font-medium " {...props} />
   ),
   h4: (props: HeadingProps) => (
     <h4 className="font-semibold text-2xl" {...props} />
@@ -33,7 +33,7 @@ const components = {
   ul: (props: ListProps) => (
     <ul className="text-gray-800 list-disc pl-5 space-y-1 my-2" {...props} />
   ),
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
+  li: (props: ListItemProps) => <li className="pl-1 text-sm" {...props} />,
   em: (props: ComponentPropsWithoutRef<"em">) => (
     <em className="font-medium" {...props} />
   ),

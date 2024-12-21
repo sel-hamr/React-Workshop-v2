@@ -6,11 +6,12 @@ import React from "react";
 
 ## Enhancing Flexibility in React Components with Default Props
 
-When building reusable React components, one challenge developers often face is balancing flexibility with simplicity. For example, how do you provide sensible defaults while still allowing the consumers of your component to customize its behavior? The solution lies in leveraging default props effectively.
-
+When building reusable React components, one challenge developers often face is balancing flexibility with simplicity. For example, how do you provide sensible defaults while still allowing the consumers of your component to customize its behavior? The solution lies in leveraging default props effectively.\
 In this article, we’ll discuss how to implement default props in React components to make them adaptable and user-friendly without compromising flexibility.
 
 #### The Problem: Managing Props Dynamically
+
+<Section.container>
 
 In real-world applications, React components often need to handle a wide range of inputs (props) that influence their appearance or behavior. For example:
 
@@ -20,12 +21,13 @@ In real-world applications, React components often need to handle a wide range o
 2. A form field could adjust its placeholder text or validation rules
    dynamically.
 
+</Section.container>
+
 While these customizations make components powerful, they can also lead to problems. Developers may forget to set certain props or pass incorrect values, causing the component to behave unexpectedly.
 
 #### The Solution: Default Props
 
-Default props are a powerful feature in React that allow you to define default values for a component’s props. When a prop is not provided by the parent component, React automatically uses the default value instead. This ensures that the component always has the necessary data to render correctly, even if the parent component forgets to pass certain props.
-
+Default props are a powerful feature in React that allow you to define default values for a component’s props. When a prop is not provided by the parent component, React automatically uses the default value instead. This ensures that the component always has the necessary data to render correctly, even if the parent component forgets to pass certain props.\
 Here’s a simple example of setting default props in a functional React component:
 
 ```jsx

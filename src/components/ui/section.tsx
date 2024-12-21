@@ -42,9 +42,9 @@ Section.Description = ({ children }: { children: React.ReactNode }) => {
   return <div className="text-sm">{children}</div>;
 };
 
-Section.Header = ({ children }: { children: React.ReactNode }) => {
+Section.container = ({ children }: { children: React.ReactNode }) => {
   return (
-    <header className="flex flex-col gap-2 row-start-1 items-start">
+    <header className="flex flex-col row-start-1 items-start">
       {children}
     </header>
   );

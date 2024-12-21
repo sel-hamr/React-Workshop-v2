@@ -10,8 +10,7 @@ import React from "react";
 
 ## Layout component
 
-The Layout Components Pattern in React is a design pattern aimed at organizing the structure and layout of an application. These components focus on the visual arrangement and placement of elements on the page, rather than their functionality.
-
+The Layout Components Pattern in React is a design pattern aimed at organizing the structure and layout of an application. These components focus on the visual arrangement and placement of elements on the page, rather than their functionality.\
 The key principle of this pattern is that components should not be aware of where they are being rendered, while Layout components should exclusively manage the presentation of those components.
 
 ### Example 1:
@@ -21,12 +20,9 @@ The key principle of this pattern is that components should not be aware of wher
   <ExampleTwo name="user" />
 </SplitScreen>
 
-The SplitScreen component takes three props: children, leftWeight, and rightWeight. The children prop represents the child components passed into SplitScreen, and in this case, we assume exactly two child components are provided.
-
-Within the SplitScreen component, we use array destructuring to extract the left and right child elements from the children prop.
-
-We then render a SplitScreen component, which acts as the main wrapper for the split screen layout. Inside the SplitScreen, we render two child components, passing the leftWeight and rightWeight props to adjust the width ratios of the left and right child.
-
+The SplitScreen component takes three props: children, leftWeight, and rightWeight. The children prop represents the child components passed into SplitScreen, and in this case, we assume exactly two child components are provided.\
+Within the SplitScreen component, we use array destructuring to extract the left and right child elements from the children prop.\
+We then render a SplitScreen component, which acts as the main wrapper for the split screen layout. Inside the SplitScreen, we render two child components, passing the leftWeight and rightWeight props to adjust the width ratios of the left and right child.\
 The left element is placed in the first child, and the right element in the second. With this approach, we create a flexible and reusable SplitScreen component that allows for customizable split-screen layouts with adjustable width ratios for each section.
 
 ### How to use :
@@ -62,8 +58,7 @@ export default function SplitScreen({
   <ContainerModel />
 </Section.Body>
 
-By following this approach, we can easily use the Modal Layout component to wrap any component and display it as a modal.
-
+By following this approach, we can easily use the Modal Layout component to wrap any component and display it as a modal.\
 The Modal Layout isn't focused on the specific content it displays; it simply serves as a container for the provided children. This makes it highly flexible and reusable across different parts of the application.
 
 ```jsx
