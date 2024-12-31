@@ -1,0 +1,81 @@
+import Section from "@/components/ui/section";
+import ExampleReactUseLocalStorage from "@/components/react-hook-local-storage";
+import React from "react";
+
+<Section>
+
+<Section.Back />
+
+## Enhancing State Management with a Custom React Hook
+
+create a custom React hook `useLocalStorage` to manage state with local storage , ensuring State Persistence and Synchronization across multiple tabs.
+
+#### Preview
+
+<Section.Body>
+  <React.Suspense fallback={<div>Loading...</div>}>
+    <ExampleReactUseLocalStorage />
+  </React.Suspense>
+</Section.Body>
+
+#### Example
+
+```jsx
+import React from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
+const App = () => {
+  const [name, setName] = useLocalStorage < string > ("name", "Guest");
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+    </div>
+  );
+};
+
+export default App;
+```
+
+#### Implementation:
+
+```jsx
+import { useSyncExternalStore } from "react";
+// Custom hook to manage local storage
+function useLocalStorage<T>(key: string, initialValue: T) {
+  // Get the current value from local storage or use the initial value
+  const getSnapshot = () => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  };
+  // Subscribe to storage events
+  const subscribe = (callback: () => void) => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === key) {
+        callback();
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  };
+  // Use useSyncExternalStore to manage the subscription
+  const value = useSyncExternalStore(subscribe, getSnapshot);
+  // Set value in localStorage
+  const setValue = (newValue: T) => {
+    try {
+      const valueToStore =
+        newValue instanceof Function ? newValue(value) : newValue;
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error("Error writing to localStorage:", error);
+    }
+  };
+  return [value, setValue] as const;
+}
+export default useLocalStorage;
+```
+
+</Section>

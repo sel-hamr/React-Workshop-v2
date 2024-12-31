@@ -20,7 +20,7 @@ const components = {
     <h3 className="text-gray-800 font-medium " {...props} />
   ),
   h4: (props: HeadingProps) => (
-    <h4 className="font-semibold text-2xl" {...props} />
+    <h4 className="font-semibold text-2xl mb-1" {...props} />
   ),
   h5: (props: HeadingProps) => <h4 className="text-sm" {...props} />,
   p: (props: ParagraphProps) => <p className="text-sm" {...props} />,

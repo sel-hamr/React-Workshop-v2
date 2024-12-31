@@ -1,0 +1,92 @@
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## Understanding React's flushSync: Ensuring Synchronous Updates
+
+React's automatic batching of state updates is a powerful feature that optimizes performance by reducing the number of re-renders. However, there are scenarios where you need to ensure that state updates and DOM changes happen immediately. This is where `flushSync` comes into play.
+
+<Section.container>
+#### what is `flushSync`?
+
+`flushSync` ia a function provided by React that force to process state updates and DOM updates synchronously. This means that any state updates wrapped inside `flushSync` will be applied immediately , and the DOM will be updated right away.
+
+</Section.container>
+<Section.container>
+
+#### Why to use `flushSync`?
+
+In most cases, React's automatic batching is beneficial and should be left as is. However there are specific scenarios where immediate updates are necessary, such as:
+
+1. **Focus management**: Ensuring an element is in the DOM before focusing on it.
+2. **DOM Calculating**: Calculating the size or position of an element after it has been rendered.
+
+</Section.container>
+<Section.container>
+### Example :Focus Management
+
+Consider a scenario where you nees to show an input field and immediately focus it when a button is clicked.\
+Without `flushSync`, the input field might not be in the DOM where the focus is called
+
+</Section.container>
+
+```jsx
+import React, { useState, useRef } from "react";
+import { flushSync } from "react-dom";
+
+function FocusExample() {
+  const [show, setShow] = useState(false);
+  const inputRef = useRef(null);
+  const handleClick = () => {
+    flushSync(() => {
+      setShow(true);
+    });
+    inputRef.current?.focus();
+  };
+  return (
+    <div>
+      <button onClick={handleClick}>Show</button>
+      {show && <input ref={inputRef} />}
+    </div>
+  );
+}
+```
+
+In this example , `flushSync` ensures that input field is rendered before the focus is called.\
+
+<Section.container>
+### Example : DOM Calculating
+
+Another common use case is calculating the size or position of an element after it has been rendered.
+
+</Section.container>
+
+```jsx
+import React, { useState, useRef } from "react";
+import { flushSync } from "react-dom";
+
+function MeasurementExample() {
+  const [height, setHeight] = useState(0);
+  const divRef = useRef(null);
+
+  const updateAndMeasure = () => {
+    flushSync(() => {
+      setHeight(100);
+    });
+    console.log(divRef.current.getBoundingClientRect().height);
+  };
+
+  return (
+    <div>
+      <button onClick={updateAndMeasure}>Update and Measure</button>
+      <div ref={divRef} style={{ height }} />
+    </div>
+  );
+}
+```
+
+Here ,`flushSync` ensures that the height of the div is calculated after the state update has been applied.
+
+</Section>

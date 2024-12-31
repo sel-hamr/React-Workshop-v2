@@ -1,0 +1,82 @@
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## Understanding React's useSyncExternalStore
+
+React 18 introduced a new hook called `useSyncExternalStore` to help manage state that is external to React.\
+This hook is particularly useful for integration with external data source or libraries that manage their own state .In this blog we'll explore how to use `useSyncExternalStore`
+
+<Section.container>
+#### what is `useSyncExternalStore`?
+
+the `useSyncExternalStore` hook is designed to subscribe to an external store and ensure that your react react component stay in sync with the store's state It takes three arguments:
+
+1. **subscribe**: A function that subscribes to the external store and return unsubScribe function.
+2. **getSnapshot**: A function that returns the current state od the external store
+3. **getServerSnapshot** (optional) : A function that returns the state of the external store for server-side rendering. it is used to hydrate the store on the server. like default value of the store. If you don't provide this function, then React will render the nearest `suspense` boundary in the loading state.
+
+</Section.container>
+<Section.container>
+### Example :
+
+Let's take the example of a component that display your current location via the geolocation API. the geolocation API is not a part of React , so we new to synchronize the external state of the geolocation API with the internal store our component
+
+</Section.container>
+
+```tsx
+import { useSyncExternalStore } from "react";
+type LocationData =
+  | { status: "unavailable"; geo?: never }
+  | { status: "available"; geo: GeolocationPosition };
+// this variable is our external store!
+let location: LocationData = { status: "unavailable" };
+
+function subscribeToGeolocation(callback: () => void) {
+  const watchId = navigator.geolocation.watchPosition((position) => {
+    location = { status: "available", geo: position };
+    callback();
+  });
+  return () => {
+    location = { status: "unavailable" };
+    return navigator.geolocation.clearWatch(watchId);
+  };
+}
+function getGeolocationSnapshot() {
+  return location;
+}
+function MyLocation() {
+  const location = useSyncExternalStore(
+    subscribeToGeolocation,
+    getGeolocationSnapshot
+  );
+  return (
+    <div>
+      {location.status === "unavailable" ? (
+        "Your location is unavailable"
+      ) : (
+        <>
+          Your location is {location.geo.coords.latitude.toFixed(2)}
+          {"°, "}
+          {location.geo.coords.longitude.toFixed(2)}
+          {"°"}
+        </>
+      )}
+    </div>
+  );
+}
+```
+
+Here's the basic API:
+
+```tsx
+const snapshot = useSyncExternalStore(
+  subscribe,
+  getSnapshot,
+  getServerSnapshot // optional
+);
+```
+
+</Section>
