@@ -1,0 +1,53 @@
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## Unlocking the Power of Imperative Handles in react
+
+When working with React, sometimes we need allows child components to to expose certain function or properties to the parent component or other child components. This is where imperative handles come into play. giving you the ability to interact with the child component directly.
+
+<Section.container>
+
+#### What are Imperative Handles?
+
+Imperative handles allow a child component to expose methods to its parent component. This interaction is achieved using `ref` , which you can obtain through the `useRef` hook.\
+A `ref` in React is an object that persists data across renders and does not trigger a re-render when updated.
+\
+\
+Here's an example where the parent component uses a `ref` to call a method defined in the child component:
+
+</Section.container>
+
+```tsx
+import React, { useRef, useImperativeHandle } from "react";
+type InputAPI = { focusInput: () => void };
+function MyInput({
+  ref,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+  ref: React.RefObject<InputAPI>;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useImperativeHandle(
+    ref,
+    () => ({ focusInput: () => inputRef.current?.focus() }),
+    []
+  );
+  return <input ref={inputRef} {...props} />;
+}
+function App() {
+  const myInputRef = useRef<InputAPI>(null);
+  return (
+    <div>
+      <MyInput ref={myInputRef} placeholder="Enter your name" />
+      <button onClick={() => myInputRef.current?.focusInput()}>
+        Focus the input
+      </button>
+    </div>
+  );
+}
+```
+
+</Section>

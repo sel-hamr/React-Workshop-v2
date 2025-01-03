@@ -64,4 +64,12 @@ export const topics = [
     title: "React local storage hook",
     link: "react-local-storage-hook",
   },
+  {
+    title: "Imperative Handles in React",
+    link: "imperative-handles",
+  },
+  {
+    title: "custom hooks in React",
+    link: "custom-hooks",
+  },
 ];
