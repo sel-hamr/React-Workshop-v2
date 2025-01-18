@@ -1,0 +1,43 @@
+import { DemoContainerComponents } from "@/components/design-patterns/container-component";
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## The Compound Components
+
+The Compound Components Pattern allows you to create a collection of component that implicitly share state, offering a more flexible and powerful API for building reusable components. These components collaborate to form a single unit of functionality.
+
+### The classic example of this is `<select>` and `<option>` in HTML:
+
+```html
+<select>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+</select>
+```
+
+The `<select>` element manages the UI's state, while the `<option>` elements serve as configurations , defining the available choices anf their values.\
+Not , imagine manually implementing this native control in React:
+
+```tsx
+<CustomSelect
+  options={[
+    { value: "1", display: "Option 1" },
+    { value: "2", display: "Option 2" },
+  ]}
+/>
+```
+
+This works fine, but it's less flexible than a compound component API, For example . What if you want to add a `disabled` prop to the `<option>` elements?\
+With the compound components pattern, you can create a more flexible API that allows you to customize the `<option>` elements:
+
+```tsx
+<CustomSelect>
+  <CustomSelect.Option value="1">Option 1</CustomSelect.Option>
+  <CustomSelect.Option value="2">Option 2</CustomSelect.Option>
+</CustomSelect>
+```
+
+</Section>

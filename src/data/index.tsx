@@ -38,38 +38,54 @@ export const topics = [
   },
   {
     title: "React createPortal",
-    link: "create-portal",
+    link: "/create-portal",
   },
   {
     title: "Error Boundary in React",
-    link: "error-boundary",
+    link: "/error-boundary",
   },
   {
     title: "key explanation in React",
-    link: "key-explanation",
+    link: "/key-explanation",
   },
   {
     title: "event Listeners in React",
-    link: "event-listeners",
+    link: "/event-listeners",
   },
   {
     title: "React flushSync",
-    link: "flush-sync",
+    link: "/flush-sync",
   },
   {
     title: "Sync External State",
-    link: "sync-external-state",
+    link: "/sync-external-state",
   },
   {
     title: "React local storage hook",
-    link: "react-local-storage-hook",
+    link: "/react-local-storage-hook",
   },
   {
     title: "Imperative Handles in React",
-    link: "imperative-handles",
+    link: "/imperative-handles",
   },
   {
     title: "custom hooks in React",
-    link: "custom-hooks",
+    link: "/custom-hooks",
+  },
+  {
+    title: "user with caching",
+    link: "/use-with-caching",
+  },
+  {
+    title: "Composition",
+    link: "design-patterns/composition",
+  },
+  {
+    title: "The Latest Ref",
+    link: "design-patterns/the-latest-ref",
+  },
+  {
+    title: "Compound Components",
+    link: "design-patterns/compound-components",
   },
 ];

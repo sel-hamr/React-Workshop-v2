@@ -1,0 +1,84 @@
+import { DemoContainerComponents } from "@/components/design-patterns/container-component";
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## The Latest Ref
+
+The Latest Ref Pattern enables you to reference the most recent value of props, state, or callback without including it in the dependency array when using it inside a useEffect
+
+### example without the latest ref
+
+```tsx
+const page = () => {
+  const [selectedPetFood, setSelectedPetFood] = useState("food");
+  const [selectedPet, setSelectedPet] = useState("dog");
+
+  const handleClick = async () => {
+    console.log(selectedPetFood, selectedPet, "before"); // {selectedPetFood: 'food', selectedPet: 'dog'}
+    // changing the state of selectedPetFood to 'food1'
+    await new Promise((resolve) => setTimeout(resolve, 3500));
+    console.log(selectedPetFood, selectedPet, "after"); // {selectedPetFood: 'food', selectedPet: 'dog'}
+  };
+  return (
+    <div className="w-96">
+      <Input
+        type="text"
+        value={selectedPetFood}
+        onChange={(e) => setSelectedPetFood(e.target.value)}
+      />
+      <Input
+        type="text"
+        value={selectedPet}
+        onChange={(e) => setSelectedPet(e.target.value)}
+      />
+      <Button onClick={handleClick} disabled={!selectedPetFood || !selectedPet}>
+        Submit
+      </Button>
+    </div>
+  );
+};
+```
+
+### example with the latest ref
+
+```tsx
+const page = () => {
+  const [selectedPetFood, setSelectedPetFood] = useState("food");
+  const [selectedPet, setSelectedPet] = useState("dog");
+  const refSelectedPetFood = React.useRef(selectedPetFood);
+  const refSelectedPet = React.useRef(selectedPet);
+
+  React.useEffect(() => {
+    refSelectedPetFood.current = selectedPetFood;
+    refSelectedPet.current = selectedPet;
+  }, [selectedPetFood, selectedPet]);
+  const handleClick = async () => {
+    console.log(refSelectedPetFood.current, refSelectedPet.current, "before"); // {selectedPetFood: 'food', selectedPet: 'dog'}
+    // changing the state of selectedPetFood to 'food1'
+    await new Promise((resolve) => setTimeout(resolve, 3500));
+    console.log(refSelectedPetFood.current, refSelectedPet.current, "after");
+  };
+  return (
+    <div className="w-96">
+      <Input
+        type="text"
+        value={selectedPetFood}
+        onChange={(e) => setSelectedPetFood(e.target.value)}
+      />
+      <Input
+        type="text"
+        value={selectedPet}
+        onChange={(e) => setSelectedPet(e.target.value)}
+      />
+      <Button onClick={handleClick} disabled={!selectedPetFood || !selectedPet}>
+        Submit
+      </Button>
+    </div>
+  );
+};
+```
+
+</Section>

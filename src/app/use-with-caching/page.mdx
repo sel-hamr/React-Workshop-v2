@@ -1,0 +1,108 @@
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## Optimizing Data Fetching in React: Using Custom Caching to Prevent Unnecessary Requests
+
+When working with React component, managing data fetching efficiently is crucial to providing a smooth and responsive user experience.\
+In many cases using `React.use` or React.useEffect for fetching data can lead to multiple redundant requests, impacting both performance and resource usage. In this post, we’ll explore how to implement a custom caching mechanism to prevent unnecessary fetches while using React.Suspense and React.ErrorBoundary to handle loading states and errors.
+
+### The Problem: Redundant Fetches in React
+
+<Section.container>
+
+Fetching data directly within a component can cause the same API endpoint to be called multiple times, especially when:
+
+- The component is re-rendered multiple times
+- The component is unmounted and re-mounted
+
+Using `React.use` or similar hooks without caching results in repeated network requests, which not only slows down the application but also increases server load.
+
+</Section.container>
+
+### The Solution: A Custom Cache for Promises
+
+A caching system can store and reuse promises to prevent redundant fetches. Below is an example of a simple caching class and how it integrates into a React component.
+
+```jsx
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+}
+
+class Cache<T> {
+  private cache = new Map<string, Promise<T>>();
+
+  async fetch(key: string, fetcher: () => Promise<T>): Promise<T> {
+    if (!this.cache.has(key)) {
+      try {
+        this.cache.set(key, fetcher());
+      } catch (error) {
+        this.cache.delete(key);
+        throw error;
+      }
+    }
+    return this.cache.get(key)!;
+  }
+
+  clear() {
+    this.cache.clear();
+  }
+}
+
+```
+
+<Section.container>
+This `Cache<T>` class stores promises in a map. It ensures that:
+
+- A promise is created only once per key.
+- Subsequent fetches return the same promise until it resolves or rejects.
+
+</Section.container>
+
+### Using the Cache in a React Component
+
+```jsx
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+}
+
+const userCache = new Cache<User>();
+export function UserProfile({ username }: { username: string }) {
+  // Use the cache to fetch the user data and store it for preventing unnecessary fetches
+  const user = use(userCache.fetch(username, () => fetchUser(username)));
+  return (
+    <div className="p-4 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">{user.name}</h2>
+      <div className="space-y-2">
+        <p>
+          <span className="font-semibold">Username:</span> {user.username}
+        </p>
+        <p>
+          <span className="font-semibold">Email:</span> {user.email}
+        </p>
+        <p>
+          <span className="font-semibold">Phone:</span> {user.phone}
+        </p>
+        <p>
+          <span className="font-semibold">Website:</span> {user.website}
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+</Section>

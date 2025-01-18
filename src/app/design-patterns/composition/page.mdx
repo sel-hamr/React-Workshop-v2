@@ -1,0 +1,86 @@
+import { DemoContainerComponents } from "@/components/design-patterns/container-component";
+import Section from "@/components/ui/section";
+import React from "react";
+
+<Section>
+<Section.Back />
+
+## The Composition
+
+The composition and Layout Components Pattern helps to avoid prop drilling and makes the code more readable and maintainable. The composition pattern is a design pattern that uses the React children prop to compose components together.\
+Let's skip to the end here. It's surprising what you can accomplish by passing react elements rather than treating components as uncrossable boundaries. We'll have a practical example in our exercise, so let me show you a quick and easy contrived example to explain what we'll be doing here:
+
+```tsx
+function App() {
+  const [count, setCount] = useState(0);
+  const increment = () => setCount((c) => c + 1);
+  return <Child count={count} increment={increment} />;
+}
+function Child({ count, increment }: { count: number; increment: () => void }) {
+  return (
+    <div>
+      <strong>
+        I am a child and I don't actually use count or increment. My child does
+        though so I have to accept those as props and forward them along.
+      </strong>
+      <GrandChild count={count} onIncrementClick={increment} />
+    </div>
+  );
+}
+function GrandChild({
+  count,
+  onIncrementClick,
+}: {
+  count: number;
+  onIncrementClick: () => void;
+}) {
+  return (
+    <div>
+      <small>I am a grand child and I just pass things off to a button</small>
+      <button onClick={onIncrementClick}>{count}</button>
+    </div>
+  );
+}
+```
+
+This prop drilling stuff is one of the reasons so many people have jumped onto
+state management solutions, whether it be libraries or React context. However,
+if we restructure things a bit, we'll notice that things get quite a bit easier
+without losing the flexibility we're hoping for.
+
+```tsx
+function App() {
+  const [count, setCount] = useState(0);
+  const increment = () => setCount((c) => c + 1);
+  return (
+    <Child
+      grandChild={
+        <GrandChild
+          button={<button onClick={onIncrementClick}>{count}</button>}
+        />
+      }
+    />
+  );
+}
+function Child({ grandChild }: { grandChild: React.ReactNode }) {
+  return (
+    <div>
+      <strong>
+        I am a child and I don't actually use count or increment. My child does
+        though so I have to accept those as props and forward them along.
+      </strong>
+      {grandChild}
+    </div>
+  );
+}
+function GrandChild({ button }: { button: React.ReactNode }) {
+  return (
+    <div>
+      <small>I am a grand child and I just pass things off to a button</small>
+      {button}
+    </div>
+  );
+}
+```
+
+</Section>
